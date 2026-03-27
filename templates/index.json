@@ -1,11 +1,5 @@
 {
   "sections": {
-    "thao_header": {
-      "type": "thao-header",
-      "settings": {
-        "logo_variant": "burgundy"
-      }
-    },
     "thao_hero": {
       "type": "thao-hero",
       "settings": {
@@ -98,7 +92,6 @@
     }
   },
   "order": [
-    "thao_header",
     "thao_hero",
     "thao_marquee",
     "thao_product",
