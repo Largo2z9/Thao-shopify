@@ -1,0 +1,278 @@
+{%- comment -%} THAO — Cart Drawer {%- endcomment -%}
+
+<style>
+  .thao-cart-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-slow) var(--ease-default),
+                visibility var(--duration-slow) var(--ease-default);
+  }
+
+  .thao-cart-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .thao-cart-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 201;
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    background: var(--thao-bg-white);
+    transform: translateX(100%);
+    transition: transform var(--duration-slow) var(--ease-default);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .thao-cart-overlay.is-open .thao-cart-drawer {
+    transform: translateX(0);
+  }
+
+  .thao-cart-drawer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-5) var(--space-5);
+    border-bottom: 1px solid var(--thao-border);
+  }
+
+  .thao-cart-drawer__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: var(--h3-mobile);
+    color: var(--thao-burgundy);
+  }
+
+  .thao-cart-drawer__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--thao-text);
+    font-size: 24px;
+    transition: opacity var(--duration-base);
+  }
+
+  .thao-cart-drawer__close:hover {
+    opacity: 0.6;
+  }
+
+  /* Shipping progress */
+  .thao-cart-drawer__shipping {
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--thao-border);
+  }
+
+  .thao-cart-drawer__shipping-bar {
+    width: 100%;
+    height: 3px;
+    background: var(--thao-border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: var(--space-2);
+  }
+
+  .thao-cart-drawer__shipping-fill {
+    height: 100%;
+    background: var(--thao-burgundy);
+    border-radius: 2px;
+    transition: width var(--duration-slow) var(--ease-default);
+  }
+
+  .thao-cart-drawer__shipping-text {
+    font-family: var(--font-body);
+    font-size: var(--caption-desktop);
+    color: var(--thao-text-secondary);
+    text-align: center;
+  }
+
+  /* Items */
+  .thao-cart-drawer__items {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-5);
+  }
+
+  .thao-cart-drawer__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: var(--space-4);
+    color: var(--thao-text-secondary);
+    font-family: var(--font-body);
+    font-size: var(--body-desktop);
+  }
+
+  .thao-cart-drawer__item {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--thao-border);
+  }
+
+  .thao-cart-drawer__item-image {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-btn);
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--thao-bg);
+  }
+
+  .thao-cart-drawer__item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .thao-cart-drawer__item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .thao-cart-drawer__item-name {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: var(--ui-size);
+    color: var(--thao-text);
+  }
+
+  .thao-cart-drawer__item-variant {
+    font-family: var(--font-body);
+    font-size: var(--caption-desktop);
+    color: var(--thao-text-secondary);
+  }
+
+  .thao-cart-drawer__item-price {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: var(--ui-size);
+    color: var(--thao-text);
+    margin-top: auto;
+  }
+
+  .thao-cart-drawer__item-remove {
+    font-family: var(--font-body);
+    font-size: var(--caption-desktop);
+    color: var(--thao-text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    align-self: flex-start;
+  }
+
+  /* Footer */
+  .thao-cart-drawer__footer {
+    padding: var(--space-5);
+    border-top: 1px solid var(--thao-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .thao-cart-drawer__subtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .thao-cart-drawer__subtotal-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: var(--body-desktop);
+    color: var(--thao-text);
+  }
+
+  .thao-cart-drawer__subtotal-price {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--thao-text);
+  }
+</style>
+
+<div class="thao-cart-overlay" id="thao-cart-overlay">
+  <div class="thao-cart-drawer" id="thao-cart-drawer">
+
+    <div class="thao-cart-drawer__header">
+      <span class="thao-cart-drawer__title">Votre panier</span>
+      <button class="thao-cart-drawer__close" id="thao-cart-close" aria-label="Fermer le panier">×</button>
+    </div>
+
+    <div class="thao-cart-drawer__shipping">
+      <div class="thao-cart-drawer__shipping-bar">
+        <div class="thao-cart-drawer__shipping-fill" id="thao-shipping-fill" style="width: 0%;"></div>
+      </div>
+      <p class="thao-cart-drawer__shipping-text" id="thao-shipping-text">
+        Plus que 40,00 € pour la livraison offerte
+      </p>
+    </div>
+
+    <div class="thao-cart-drawer__items" id="thao-cart-items">
+      <div class="thao-cart-drawer__empty">
+        <p>Votre panier est vide.</p>
+        <a href="#produit" class="thao-btn thao-btn--secondary" id="thao-cart-shop">Découvrir</a>
+      </div>
+    </div>
+
+    <div class="thao-cart-drawer__footer">
+      <div class="thao-cart-drawer__subtotal">
+        <span class="thao-cart-drawer__subtotal-label">Sous-total</span>
+        <span class="thao-cart-drawer__subtotal-price" id="thao-cart-subtotal">0,00 €</span>
+      </div>
+      <a href="/checkout" class="thao-btn thao-btn--primary thao-btn--full">Commander</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    var overlay = document.getElementById('thao-cart-overlay');
+    var closeBtn = document.getElementById('thao-cart-close');
+    var shopBtn = document.getElementById('thao-cart-shop');
+    var cartLink = document.querySelector('.thao-header__cart');
+
+    function openCart(e) {
+      if (e) e.preventDefault();
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart() {
+      overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    if (cartLink) cartLink.addEventListener('click', openCart);
+    if (closeBtn) closeBtn.addEventListener('click', closeCart);
+    if (shopBtn) shopBtn.addEventListener('click', closeCart);
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeCart();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeCart();
+    });
+  })();
+</script>

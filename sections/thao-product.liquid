@@ -1,0 +1,461 @@
+{%- comment -%} THAO — Product Section (One-Pager) {%- endcomment -%}
+
+<style>
+  .thao-product {
+    background-color: var(--thao-bg-white);
+  }
+
+  .thao-product__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--grid-gap-mobile);
+  }
+
+  @media (min-width: 750px) {
+    .thao-product__grid {
+      grid-template-columns: 55% 1fr;
+      gap: var(--space-7);
+      align-items: start;
+    }
+  }
+
+  /* Gallery */
+  .thao-product__gallery {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  @media (min-width: 750px) {
+    .thao-product__gallery {
+      position: sticky;
+      top: calc(var(--header-height) + var(--space-5));
+    }
+  }
+
+  .thao-product__main-image {
+    aspect-ratio: 1;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background-color: var(--thao-bg);
+  }
+
+  .thao-product__main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .thao-product__thumbnails {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .thao-product__thumbnails::-webkit-scrollbar {
+    display: none;
+  }
+
+  .thao-product__thumb {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    border-radius: var(--radius-btn);
+    overflow: hidden;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color var(--duration-fast) var(--ease-default);
+    background-color: var(--thao-bg);
+  }
+
+  .thao-product__thumb.is-active {
+    border-color: var(--thao-burgundy);
+  }
+
+  .thao-product__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Placeholder */
+  .thao-product__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--thao-bg);
+    color: var(--thao-text-secondary);
+    font-family: var(--font-body);
+    font-size: var(--caption-desktop);
+  }
+
+  /* Info */
+  .thao-product__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding-top: var(--space-4);
+  }
+
+  @media (min-width: 750px) {
+    .thao-product__info {
+      padding-top: var(--space-6);
+    }
+  }
+
+  .thao-product__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: var(--h2-mobile);
+    line-height: var(--lh-heading);
+    letter-spacing: var(--ls-heading);
+    color: var(--thao-burgundy);
+    margin: 0;
+  }
+
+  @media (min-width: 750px) {
+    .thao-product__title {
+      font-size: var(--h2-desktop);
+    }
+  }
+
+  .thao-product__rating {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: var(--ui-size);
+    color: var(--thao-text-secondary);
+  }
+
+  .thao-product__stars {
+    color: var(--thao-burgundy);
+    letter-spacing: 2px;
+  }
+
+  .thao-product__price {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--thao-text);
+  }
+
+  /* Swatches */
+  .thao-product__option-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: var(--ui-size);
+    letter-spacing: var(--ls-ui);
+    color: var(--thao-text);
+    margin-bottom: var(--space-3);
+    display: block;
+  }
+
+  .thao-product__colors {
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  .thao-product__sizes {
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  .thao-product__size-guide {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: var(--caption-desktop);
+    color: var(--thao-text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: var(--space-2);
+  }
+
+  /* Quantity */
+  .thao-product__quantity {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1.5px solid var(--thao-border);
+    border-radius: var(--radius-btn);
+    width: fit-content;
+  }
+
+  .thao-product__qty-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--thao-text);
+    transition: opacity var(--duration-base);
+  }
+
+  .thao-product__qty-btn:hover {
+    opacity: 0.6;
+  }
+
+  .thao-product__qty-value {
+    width: 40px;
+    text-align: center;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: var(--body-desktop);
+    border: none;
+    background: none;
+    color: var(--thao-text);
+    -moz-appearance: textfield;
+  }
+
+  .thao-product__qty-value::-webkit-outer-spin-button,
+  .thao-product__qty-value::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Payment icons */
+  .thao-product__payments {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    padding-top: var(--space-3);
+  }
+
+  .thao-product__payments svg {
+    height: 24px;
+    width: auto;
+    opacity: 0.5;
+  }
+
+  /* Benefits */
+  .thao-product__benefits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    padding: var(--space-5) 0;
+    border-top: 1px solid var(--thao-border);
+    border-bottom: 1px solid var(--thao-border);
+  }
+
+  .thao-product__benefit {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .thao-product__benefit-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    color: var(--thao-burgundy);
+  }
+
+  .thao-product__benefit-text {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: var(--caption-desktop);
+    line-height: var(--lh-ui);
+    color: var(--thao-text);
+  }
+
+  /* Shipping note */
+  .thao-product__shipping {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: var(--caption-desktop);
+    color: var(--thao-text-secondary);
+    text-align: center;
+  }
+</style>
+
+<section class="thao-product thao-section" id="produit">
+  <div class="thao-container">
+    <div class="thao-product__grid">
+
+      {%- comment -%} Gallery {%- endcomment -%}
+      <div class="thao-product__gallery thao-reveal">
+        <div class="thao-product__main-image" id="thao-main-image">
+          {%- if section.settings.product_image_1 != blank -%}
+            {{ section.settings.product_image_1 | image_url: width: 1200 | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 750px) 55vw, 100vw',
+              widths: '400,600,800,1000,1200',
+              alt: 'Grip socks THAO'
+            }}
+          {%- else -%}
+            <div class="thao-product__placeholder" style="aspect-ratio:1;">
+              Photo produit
+            </div>
+          {%- endif -%}
+        </div>
+        <div class="thao-product__thumbnails">
+          {%- for i in (1..6) -%}
+            {%- assign img_key = 'product_image_' | append: i -%}
+            <div class="thao-product__thumb{% if i == 1 %} is-active{% endif %}" data-index="{{ i }}">
+              {%- if section.settings[img_key] != blank -%}
+                {{ section.settings[img_key] | image_url: width: 200 | image_tag:
+                  loading: 'lazy',
+                  alt: 'Grip socks THAO - vue ' | append: i
+                }}
+              {%- else -%}
+                <div class="thao-product__placeholder" style="width:100%;height:100%;">{{ i }}</div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- comment -%} Info {%- endcomment -%}
+      <div class="thao-product__info thao-reveal">
+
+        <div>
+          <h2 class="thao-product__title">{{ section.settings.product_title | default: 'Grip Socks — Latte' }}</h2>
+          <div class="thao-product__rating">
+            <span class="thao-product__stars">★★★★★</span>
+            <span>4.9 ({{ section.settings.review_count | default: '128' }} avis)</span>
+          </div>
+        </div>
+
+        <div class="thao-product__price">{{ section.settings.product_price | default: '19,90 €' }}</div>
+
+        {%- comment -%} Color swatches {%- endcomment -%}
+        <div>
+          <span class="thao-product__option-label">Couleur — <span id="thao-color-name">Latte</span></span>
+          <div class="thao-product__colors">
+            <button class="thao-swatch-color is-active" style="background-color: #D4C4B0;" data-color="Latte" aria-label="Couleur Latte"></button>
+            <button class="thao-swatch-color" style="background-color: #E8B4B8;" data-color="Pivoine" aria-label="Couleur Pivoine"></button>
+            <button class="thao-swatch-color" style="background-color: #F5F0EB;" data-color="Nuage" aria-label="Couleur Nuage"></button>
+          </div>
+        </div>
+
+        {%- comment -%} Size swatches {%- endcomment -%}
+        <div>
+          <span class="thao-product__option-label">Taille</span>
+          <div class="thao-product__sizes">
+            <button class="thao-swatch-size is-active" data-size="S/M">S/M <span class="thao-caption" style="margin-left:4px;">(35-39)</span></button>
+            <button class="thao-swatch-size" data-size="M/L">M/L <span class="thao-caption" style="margin-left:4px;">(39-43)</span></button>
+          </div>
+          <button class="thao-product__size-guide" id="thao-size-guide-trigger">Guide des tailles</button>
+        </div>
+
+        {%- comment -%} Quantity {%- endcomment -%}
+        <div>
+          <span class="thao-product__option-label">Quantité</span>
+          <div class="thao-product__quantity">
+            <button class="thao-product__qty-btn" id="thao-qty-minus" aria-label="Diminuer la quantité">−</button>
+            <input type="number" class="thao-product__qty-value" id="thao-qty" value="1" min="1" max="10" aria-label="Quantité">
+            <button class="thao-product__qty-btn" id="thao-qty-plus" aria-label="Augmenter la quantité">+</button>
+          </div>
+        </div>
+
+        {%- comment -%} ATC {%- endcomment -%}
+        <button class="thao-btn thao-btn--primary thao-btn--full" id="thao-atc">
+          Ajouter au panier
+        </button>
+
+        <div class="thao-product__payments">
+          <svg viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#000"/><text x="19" y="15" text-anchor="middle" fill="#fff" font-size="7" font-family="sans-serif">Pay</text></svg>
+          <svg viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#5A31F4"/><text x="19" y="15" text-anchor="middle" fill="#fff" font-size="6" font-family="sans-serif">Shop</text></svg>
+        </div>
+
+        {%- comment -%} Benefits {%- endcomment -%}
+        <div class="thao-product__benefits">
+          <div class="thao-product__benefit">
+            <svg class="thao-product__benefit-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="12"/><path d="M16 10v6l4 2"/></svg>
+            <span class="thao-product__benefit-text">Grip silicone<br>antidérapant</span>
+          </div>
+          <div class="thao-product__benefit">
+            <svg class="thao-product__benefit-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8"/><path d="M12 16a4 4 0 108 0"/></svg>
+            <span class="thao-product__benefit-text">Coton premium<br>respirant</span>
+          </div>
+          <div class="thao-product__benefit">
+            <svg class="thao-product__benefit-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="6" width="20" height="20" rx="4"/><path d="M12 16l3 3 5-6"/></svg>
+            <span class="thao-product__benefit-text">Design français<br>exclusif</span>
+          </div>
+          <div class="thao-product__benefit">
+            <svg class="thao-product__benefit-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 4v24M4 16h24"/><circle cx="16" cy="16" r="6"/></svg>
+            <span class="thao-product__benefit-text">Taille<br>universelle</span>
+          </div>
+        </div>
+
+        <p class="thao-product__shipping">
+          Livraison offerte dès 40€ · Retours sous 30 jours
+        </p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    /* Color swatches */
+    document.querySelectorAll('.thao-swatch-color').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.thao-swatch-color').forEach(function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+        var nameEl = document.getElementById('thao-color-name');
+        if (nameEl) nameEl.textContent = btn.dataset.color;
+      });
+    });
+
+    /* Size swatches */
+    document.querySelectorAll('.thao-swatch-size').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.thao-swatch-size').forEach(function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+      });
+    });
+
+    /* Quantity */
+    var qtyInput = document.getElementById('thao-qty');
+    document.getElementById('thao-qty-minus').addEventListener('click', function () {
+      var v = parseInt(qtyInput.value, 10);
+      if (v > 1) qtyInput.value = v - 1;
+    });
+    document.getElementById('thao-qty-plus').addEventListener('click', function () {
+      var v = parseInt(qtyInput.value, 10);
+      if (v < 10) qtyInput.value = v + 1;
+    });
+
+    /* Thumbnails */
+    document.querySelectorAll('.thao-product__thumb').forEach(function (thumb) {
+      thumb.addEventListener('click', function () {
+        document.querySelectorAll('.thao-product__thumb').forEach(function (t) { t.classList.remove('is-active'); });
+        thumb.classList.add('is-active');
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "THAO Product",
+  "class": "section-thao-product",
+  "settings": [
+    { "type": "text", "id": "product_title", "label": "Product title", "default": "Grip Socks — Latte" },
+    { "type": "text", "id": "product_price", "label": "Price", "default": "19,90 €" },
+    { "type": "text", "id": "review_count", "label": "Review count", "default": "128" },
+    { "type": "image_picker", "id": "product_image_1", "label": "Product image 1" },
+    { "type": "image_picker", "id": "product_image_2", "label": "Product image 2" },
+    { "type": "image_picker", "id": "product_image_3", "label": "Product image 3" },
+    { "type": "image_picker", "id": "product_image_4", "label": "Product image 4" },
+    { "type": "image_picker", "id": "product_image_5", "label": "Product image 5" },
+    { "type": "image_picker", "id": "product_image_6", "label": "Product image 6" }
+  ],
+  "presets": [{ "name": "THAO Product" }]
+}
+{% endschema %}

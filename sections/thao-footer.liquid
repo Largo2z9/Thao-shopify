@@ -1,0 +1,130 @@
+{%- comment -%} THAO — Footer {%- endcomment -%}
+
+<style>
+  .thao-footer {
+    background-color: var(--thao-burgundy);
+    color: #FFFFFF;
+    padding: var(--space-8) 0;
+  }
+
+  .thao-footer__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-7);
+  }
+
+  .thao-footer__logo img {
+    height: 24px;
+    width: auto;
+  }
+
+  .thao-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4) var(--space-6);
+  }
+
+  .thao-footer__link {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: var(--ui-size);
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color var(--duration-base) var(--ease-default);
+  }
+
+  .thao-footer__link:hover {
+    color: #FFFFFF;
+  }
+
+  .thao-footer__social {
+    display: flex;
+    gap: var(--space-5);
+  }
+
+  .thao-footer__social a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color var(--duration-base) var(--ease-default);
+  }
+
+  .thao-footer__social a:hover {
+    color: #FFFFFF;
+  }
+
+  .thao-footer__payments {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    opacity: 0.5;
+  }
+
+  .thao-footer__payments svg {
+    height: 20px;
+    width: auto;
+  }
+
+  .thao-footer__copy {
+    font-family: var(--font-body);
+    font-size: var(--caption-mobile);
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+  }
+</style>
+
+<footer class="thao-footer" id="footer">
+  <div class="thao-container">
+    <div class="thao-footer__inner">
+
+      <a href="/" class="thao-footer__logo" aria-label="{{ shop.name }}">
+        <img src="{{ 'logo-thao-white.svg' | asset_url }}" alt="{{ shop.name }}" width="80" height="24" loading="lazy">
+      </a>
+
+      <nav class="thao-footer__links" aria-label="Footer navigation">
+        <a href="/pages/notre-histoire" class="thao-footer__link">Notre histoire</a>
+        <a href="#faq" class="thao-footer__link">FAQ</a>
+        <a href="/pages/contact" class="thao-footer__link">Contact</a>
+        <a href="/policies/terms-of-service" class="thao-footer__link">CGV</a>
+        <a href="/policies/privacy-policy" class="thao-footer__link">Confidentialité</a>
+        <a href="/pages/mentions-legales" class="thao-footer__link">Mentions légales</a>
+      </nav>
+
+      <div class="thao-footer__social">
+        <a href="{{ section.settings.instagram_url | default: '#' }}" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="{{ section.settings.tiktok_url | default: '#' }}" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13a8.18 8.18 0 005.58 2.2V11.7a4.83 4.83 0 01-3.77-1.78V6.69h3.77z"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="thao-footer__payments">
+        <svg viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="3" fill="#fff"/><text x="19" y="15" text-anchor="middle" fill="#1a1a1a" font-size="7" font-family="sans-serif">Visa</text></svg>
+        <svg viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="3" fill="#fff"/><text x="19" y="15" text-anchor="middle" fill="#1a1a1a" font-size="6" font-family="sans-serif">MC</text></svg>
+        <svg viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="3" fill="#fff"/><text x="19" y="15" text-anchor="middle" fill="#1a1a1a" font-size="7" font-family="sans-serif">Pay</text></svg>
+        <svg viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="3" fill="#fff"/><text x="19" y="15" text-anchor="middle" fill="#1a1a1a" font-size="6" font-family="sans-serif">Shop</text></svg>
+      </div>
+
+      <p class="thao-footer__copy">&copy; {{ 'now' | date: '%Y' }} THAO — Tous droits réservés</p>
+
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "THAO Footer",
+  "class": "section-thao-footer",
+  "settings": [
+    { "type": "url", "id": "instagram_url", "label": "Instagram URL" },
+    { "type": "url", "id": "tiktok_url", "label": "TikTok URL" }
+  ]
+}
+{% endschema %}

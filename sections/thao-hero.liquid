@@ -1,0 +1,195 @@
+{%- comment -%} THAO — Hero Section {%- endcomment -%}
+
+<style>
+  .thao-hero {
+    position: relative;
+    height: 85vh;
+    min-height: 500px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: calc(var(--header-height) * -1);
+    padding-top: var(--header-height);
+  }
+
+  @media (min-width: 750px) {
+    .thao-hero {
+      height: 100vh;
+    }
+  }
+
+  .thao-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .thao-hero__media img,
+  .thao-hero__media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .thao-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0.1) 40%,
+      transparent 70%
+    );
+  }
+
+  .thao-hero__content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 0 var(--padding-x-mobile) var(--space-9);
+    max-width: 720px;
+  }
+
+  @media (min-width: 750px) {
+    .thao-hero__content {
+      padding: 0 var(--padding-x-desktop) var(--space-11);
+    }
+  }
+
+  .thao-hero__heading {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: var(--h1-mobile);
+    line-height: var(--lh-heading);
+    letter-spacing: var(--ls-heading);
+    color: #FFFFFF;
+    margin: 0 0 var(--space-3);
+  }
+
+  @media (min-width: 750px) {
+    .thao-hero__heading {
+      font-size: var(--h1-desktop);
+      margin-bottom: var(--space-4);
+    }
+  }
+
+  .thao-hero__subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: var(--body-mobile);
+    line-height: var(--lh-body);
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 var(--space-6);
+  }
+
+  @media (min-width: 750px) {
+    .thao-hero__subtitle {
+      font-size: 18px;
+    }
+  }
+
+  .thao-hero__scroll {
+    position: absolute;
+    bottom: var(--space-6);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: rgba(255, 255, 255, 0.6);
+    animation: thao-bounce 2s ease infinite;
+  }
+
+  @keyframes thao-bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* Placeholder when no image set */
+  .thao-hero__placeholder {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(135deg, #EFEAE4 0%, #FFD9D9 50%, #4D0011 100%);
+  }
+</style>
+
+<section class="thao-hero" id="hero">
+  <div class="thao-hero__media">
+    {%- if section.settings.hero_image != blank -%}
+      {{ section.settings.hero_image | image_url: width: 2000 | image_tag:
+        loading: 'eager',
+        fetchpriority: 'high',
+        sizes: '100vw',
+        widths: '600,900,1200,1600,2000',
+        alt: section.settings.hero_heading
+      }}
+    {%- else -%}
+      <div class="thao-hero__placeholder"></div>
+    {%- endif -%}
+  </div>
+
+  <div class="thao-hero__overlay"></div>
+
+  <div class="thao-hero__content">
+    <h1 class="thao-hero__heading">
+      {{ section.settings.hero_heading | default: 'Grip socks pour celles qui bougent.' }}
+    </h1>
+    <p class="thao-hero__subtitle">
+      {{ section.settings.hero_subtitle | default: 'Coton premium. Design français. Grip absolu.' }}
+    </p>
+    <a href="#produit" class="thao-btn thao-btn--white">
+      {{ section.settings.hero_cta | default: 'Découvrir' }}
+    </a>
+  </div>
+
+  <div class="thao-hero__scroll" aria-hidden="true">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "THAO Hero",
+  "class": "section-thao-hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image",
+      "info": "Recommended: 2000×1200px, lifestyle pilates photo"
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Heading",
+      "default": "Grip socks pour celles qui bougent."
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "Subtitle",
+      "default": "Coton premium. Design français. Grip absolu."
+    },
+    {
+      "type": "text",
+      "id": "hero_cta",
+      "label": "CTA text",
+      "default": "Découvrir"
+    }
+  ],
+  "presets": [
+    {
+      "name": "THAO Hero"
+    }
+  ]
+}
+{% endschema %}

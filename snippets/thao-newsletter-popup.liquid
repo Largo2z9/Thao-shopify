@@ -1,0 +1,157 @@
+{%- comment -%} THAO — Newsletter Popup {%- endcomment -%}
+
+<style>
+  .thao-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-slow) var(--ease-default),
+                visibility var(--duration-slow) var(--ease-default);
+    padding: var(--padding-x-mobile);
+  }
+
+  .thao-popup-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .thao-popup {
+    background: var(--thao-bg-white);
+    border-radius: var(--radius-modal);
+    max-width: 480px;
+    width: 100%;
+    padding: var(--space-7);
+    text-align: center;
+    position: relative;
+    transform: scale(0.95);
+    transition: transform var(--duration-slow) var(--ease-default);
+  }
+
+  .thao-popup-overlay.is-open .thao-popup {
+    transform: scale(1);
+  }
+
+  .thao-popup__close {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--thao-text-secondary);
+    font-size: 20px;
+  }
+
+  .thao-popup__heading {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: var(--h3-mobile);
+    color: var(--thao-burgundy);
+    margin-bottom: var(--space-3);
+  }
+
+  @media (min-width: 750px) {
+    .thao-popup__heading {
+      font-size: var(--h3-desktop);
+    }
+  }
+
+  .thao-popup__text {
+    font-family: var(--font-body);
+    font-size: var(--body-mobile);
+    color: var(--thao-text-secondary);
+    margin-bottom: var(--space-5);
+  }
+
+  .thao-popup__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .thao-popup__dismiss {
+    font-family: var(--font-body);
+    font-size: var(--caption-desktop);
+    color: var(--thao-text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: var(--space-4);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>
+
+<div class="thao-popup-overlay" id="thao-popup-overlay">
+  <div class="thao-popup">
+    <button class="thao-popup__close" id="thao-popup-close" aria-label="Fermer">×</button>
+
+    <h3 class="thao-popup__heading">Accédez aux avant-premières</h3>
+    <p class="thao-popup__text">Nouveautés, drops exclusifs et conseils pilates. Pas de spam, promis.</p>
+
+    <form class="thao-popup__form" id="thao-popup-form">
+      <input type="email" class="thao-input" placeholder="Votre email" required aria-label="Adresse email">
+      <button type="submit" class="thao-btn thao-btn--primary thao-btn--full">Rejoindre</button>
+    </form>
+
+    <button class="thao-popup__dismiss" id="thao-popup-dismiss">Non merci</button>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var overlay = document.getElementById('thao-popup-overlay');
+    var closeBtn = document.getElementById('thao-popup-close');
+    var dismissBtn = document.getElementById('thao-popup-dismiss');
+    var STORAGE_KEY = 'thao_popup_dismissed';
+
+    function closePopup() {
+      overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+      sessionStorage.setItem(STORAGE_KEY, '1');
+    }
+
+    function openPopup() {
+      if (sessionStorage.getItem(STORAGE_KEY)) return;
+      overlay.classList.add('is-open');
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closePopup);
+    if (dismissBtn) dismissBtn.addEventListener('click', closePopup);
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closePopup();
+    });
+
+    /* Exit-intent (desktop) */
+    if (window.innerWidth >= 750) {
+      document.addEventListener('mouseout', function (e) {
+        if (e.clientY < 5) openPopup();
+      }, { once: true });
+    } else {
+      /* 30s delay (mobile) */
+      setTimeout(openPopup, 30000);
+    }
+
+    /* Form submit */
+    var form = document.getElementById('thao-popup-form');
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        closePopup();
+        /* TODO: Klaviyo integration */
+      });
+    }
+  })();
+</script>

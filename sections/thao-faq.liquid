@@ -1,0 +1,64 @@
+{%- comment -%} THAO — FAQ Accordion {%- endcomment -%}
+
+<style>
+  .thao-faq__inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .thao-faq__heading {
+    text-align: center;
+    margin-bottom: var(--space-7);
+  }
+</style>
+
+<section class="thao-section" id="faq">
+  <div class="thao-container">
+    <div class="thao-faq__inner">
+
+      <h2 class="thao-h2 thao-faq__heading thao-reveal">Questions fréquentes</h2>
+
+      {%- for block in section.blocks -%}
+        <details class="thao-accordion thao-reveal"{% if forloop.first %} open{% endif %} {{ block.shopify_attributes }}>
+          <summary class="thao-accordion__trigger">
+            <span>{{ block.settings.question }}</span>
+            <span class="thao-accordion__icon">+</span>
+          </summary>
+          <div class="thao-accordion__content">
+            {{ block.settings.answer }}
+          </div>
+        </details>
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "THAO FAQ",
+  "class": "section-thao-faq",
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Quelle taille choisir ?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Nous proposons deux tailles : S/M (pointure 35-39) et M/L (pointure 39-43). En cas de doute, nous recommandons la taille S/M.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "THAO FAQ",
+      "blocks": [
+        { "type": "question", "settings": { "question": "Quelle taille choisir ?", "answer": "<p>Nous proposons deux tailles : S/M (pointure 35-39) et M/L (pointure 39-43). En cas de doute, nous recommandons la taille S/M.</p>" } },
+        { "type": "question", "settings": { "question": "Combien coûte la livraison ?", "answer": "<p>La livraison est offerte dès 40€ d'achat. En dessous, les frais de port sont de 3,90€. Livraison en 3 à 5 jours ouvrés en France métropolitaine.</p>" } },
+        { "type": "question", "settings": { "question": "Comment entretenir mes grip socks ?", "answer": "<p>Lavage en machine à 30°C, séchage à l'air libre. Ne pas repasser ni passer au sèche-linge pour préserver les grips en silicone.</p>" } },
+        { "type": "question", "settings": { "question": "Quel est le délai de livraison ?", "answer": "<p>Comptez 3 à 5 jours ouvrés pour la France métropolitaine. Vous recevrez un email de suivi dès l'expédition de votre commande.</p>" } },
+        { "type": "question", "settings": { "question": "Puis-je retourner ma commande ?", "answer": "<p>Oui, vous disposez de 30 jours après réception pour retourner votre commande. Les retours sont gratuits. Contactez-nous à hello@thao.fr pour initier un retour.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

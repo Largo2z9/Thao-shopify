@@ -1,0 +1,219 @@
+{%- comment -%} THAO — Bundle Section {%- endcomment -%}
+
+<style>
+  .thao-bundle {
+    background-color: var(--thao-accent);
+  }
+
+  .thao-bundle__inner {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .thao-bundle__badge {
+    margin-bottom: var(--space-4);
+  }
+
+  .thao-bundle__heading {
+    margin-bottom: var(--space-3);
+  }
+
+  .thao-bundle__subtitle {
+    font-family: var(--font-body);
+    font-size: var(--body-mobile);
+    color: var(--thao-text-secondary);
+    margin-bottom: var(--space-7);
+  }
+
+  @media (min-width: 750px) {
+    .thao-bundle__subtitle {
+      font-size: var(--body-desktop);
+    }
+  }
+
+  /* Tiers */
+  .thao-bundle__tiers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  @media (min-width: 750px) {
+    .thao-bundle__tiers {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+    }
+  }
+
+  .thao-bundle__tier {
+    background: var(--thao-bg-white);
+    border-radius: var(--radius-card);
+    padding: var(--space-5) var(--space-4);
+    text-align: center;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color var(--duration-fast) var(--ease-default),
+                transform var(--duration-fast) var(--ease-default);
+  }
+
+  .thao-bundle__tier:hover {
+    border-color: var(--thao-burgundy);
+  }
+
+  .thao-bundle__tier.is-active {
+    border-color: var(--thao-burgundy);
+    transform: scale(1.02);
+  }
+
+  .thao-bundle__tier-pairs {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: var(--h3-mobile);
+    color: var(--thao-burgundy);
+    margin-bottom: var(--space-2);
+  }
+
+  @media (min-width: 750px) {
+    .thao-bundle__tier-pairs {
+      font-size: var(--h3-desktop);
+    }
+  }
+
+  .thao-bundle__tier-discount {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: var(--ui-size);
+    color: var(--thao-burgundy);
+    margin-bottom: var(--space-2);
+  }
+
+  .thao-bundle__tier-price {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: var(--body-mobile);
+    color: var(--thao-text);
+    margin-bottom: var(--space-1);
+  }
+
+  .thao-bundle__tier-saving {
+    font-family: var(--font-body);
+    font-size: var(--caption-desktop);
+    color: var(--thao-text-secondary);
+  }
+
+  /* Progress bar */
+  .thao-bundle__progress {
+    margin-bottom: var(--space-6);
+  }
+
+  .thao-bundle__progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(77, 0, 17, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: var(--space-3);
+  }
+
+  .thao-bundle__progress-fill {
+    height: 100%;
+    background: var(--thao-burgundy);
+    border-radius: 2px;
+    width: 25%;
+    transition: width var(--duration-slow) var(--ease-default);
+  }
+
+  .thao-bundle__progress-text {
+    font-family: var(--font-body);
+    font-size: var(--caption-desktop);
+    color: var(--thao-text-secondary);
+  }
+</style>
+
+<section class="thao-bundle thao-section" id="bundle">
+  <div class="thao-container">
+    <div class="thao-bundle__inner thao-reveal">
+
+      <div class="thao-bundle__badge">
+        <span class="thao-badge">Économisez jusqu'à 45%</span>
+      </div>
+
+      <h2 class="thao-h2 thao-bundle__heading">Composez votre pack</h2>
+      <p class="thao-bundle__subtitle">Plus vous ajoutez, plus vous économisez.</p>
+
+      <div class="thao-bundle__tiers" id="thao-bundle-tiers">
+        <div class="thao-bundle__tier is-active" data-pairs="2" data-discount="20" data-price="31,84" data-saving="7,96">
+          <div class="thao-bundle__tier-pairs">2</div>
+          <div class="thao-bundle__tier-discount">−20%</div>
+          <div class="thao-bundle__tier-price">31,84 €</div>
+          <div class="thao-bundle__tier-saving">Économie 7,96 €</div>
+        </div>
+        <div class="thao-bundle__tier" data-pairs="4" data-discount="27" data-price="58,11" data-saving="21,49">
+          <div class="thao-bundle__tier-pairs">4</div>
+          <div class="thao-bundle__tier-discount">−27%</div>
+          <div class="thao-bundle__tier-price">58,11 €</div>
+          <div class="thao-bundle__tier-saving">Économie 21,49 €</div>
+        </div>
+        <div class="thao-bundle__tier" data-pairs="6" data-discount="33" data-price="79,99" data-saving="39,41">
+          <div class="thao-bundle__tier-pairs">6</div>
+          <div class="thao-bundle__tier-discount">−33%</div>
+          <div class="thao-bundle__tier-price">79,99 €</div>
+          <div class="thao-bundle__tier-saving">Économie 39,41 €</div>
+        </div>
+        <div class="thao-bundle__tier" data-pairs="8" data-discount="45" data-price="87,56" data-saving="71,64">
+          <div class="thao-bundle__tier-pairs">8</div>
+          <div class="thao-bundle__tier-discount">−45%</div>
+          <div class="thao-bundle__tier-price">87,56 €</div>
+          <div class="thao-bundle__tier-saving">Économie 71,64 €</div>
+        </div>
+      </div>
+
+      <div class="thao-bundle__progress">
+        <div class="thao-bundle__progress-bar">
+          <div class="thao-bundle__progress-fill" id="thao-bundle-fill"></div>
+        </div>
+        <p class="thao-bundle__progress-text" id="thao-bundle-progress-text">
+          Ajoutez 2 paires de plus pour débloquer −27%
+        </p>
+      </div>
+
+      <a href="#produit" class="thao-btn thao-btn--primary">Choisir mes paires</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var tiers = document.querySelectorAll('.thao-bundle__tier');
+    var fill = document.getElementById('thao-bundle-fill');
+    var progressText = document.getElementById('thao-bundle-progress-text');
+    var fillMap = { '2': '25%', '4': '50%', '6': '75%', '8': '100%' };
+    var nextMap = {
+      '2': 'Ajoutez 2 paires de plus pour débloquer −27%',
+      '4': 'Ajoutez 2 paires de plus pour débloquer −33%',
+      '6': 'Ajoutez 2 paires de plus pour débloquer −45%',
+      '8': 'Maximum atteint — vous économisez 71,64 € !'
+    };
+
+    tiers.forEach(function (tier) {
+      tier.addEventListener('click', function () {
+        tiers.forEach(function (t) { t.classList.remove('is-active'); });
+        tier.classList.add('is-active');
+        var pairs = tier.dataset.pairs;
+        if (fill) fill.style.width = fillMap[pairs];
+        if (progressText) progressText.textContent = nextMap[pairs];
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "THAO Bundle",
+  "class": "section-thao-bundle",
+  "settings": [],
+  "presets": [{ "name": "THAO Bundle" }]
+}
+{% endschema %}

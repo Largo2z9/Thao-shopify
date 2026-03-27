@@ -1,0 +1,458 @@
+/* ==========================================================================
+   THAO — Design System Base
+   Premium grip socks · One-pager
+   ========================================================================== */
+
+/* ---------- Fonts ---------- */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('plus-jakarta-sans-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('plus-jakarta-sans-extrabold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fustat';
+  src: url('fustat-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fustat';
+  src: url('fustat-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fustat';
+  src: url('fustat-semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Design Tokens ---------- */
+:root {
+  /* Colors */
+  --thao-bg: #EFEAE4;
+  --thao-bg-white: #FFFFFF;
+  --thao-accent: #FFD9D9;
+  --thao-burgundy: #4D0011;
+  --thao-text: #1A1A1A;
+  --thao-text-secondary: #6B6560;
+  --thao-border: #E0DBD5;
+
+  /* Typography */
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Fustat', sans-serif;
+
+  /* Sizes */
+  --h1-desktop: 56px;
+  --h1-mobile: 36px;
+  --h2-desktop: 40px;
+  --h2-mobile: 28px;
+  --h3-desktop: 24px;
+  --h3-mobile: 20px;
+  --body-desktop: 16px;
+  --body-mobile: 15px;
+  --ui-size: 14px;
+  --caption-desktop: 13px;
+  --caption-mobile: 12px;
+
+  /* Line Heights */
+  --lh-heading: 1.1;
+  --lh-body: 1.6;
+  --lh-ui: 1.4;
+
+  /* Letter Spacing */
+  --ls-heading: -0.02em;
+  --ls-body: 0;
+  --ls-ui: 0.04em;
+
+  /* Spacing (8px scale) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 100px;
+  --space-11: 120px;
+
+  /* Layout */
+  --container-max: 1200px;
+  --padding-x-desktop: 48px;
+  --padding-x-mobile: 20px;
+  --section-py-desktop: 100px;
+  --section-py-mobile: 64px;
+  --grid-gap-desktop: 24px;
+  --grid-gap-mobile: 16px;
+
+  /* Radius */
+  --radius-btn: 8px;
+  --radius-card: 12px;
+  --radius-pill: 20px;
+  --radius-modal: 16px;
+
+  /* Transitions */
+  --ease-default: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-reveal: 600ms;
+
+  /* Header */
+  --header-height: 64px;
+}
+
+/* ---------- Global Reset (THAO layer) ---------- */
+.thao-page {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--body-mobile);
+  line-height: var(--lh-body);
+  color: var(--thao-text);
+  background-color: var(--thao-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 750px) {
+  .thao-page {
+    font-size: var(--body-desktop);
+  }
+}
+
+/* ---------- Container ---------- */
+.thao-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-left: var(--padding-x-mobile);
+  padding-right: var(--padding-x-mobile);
+}
+
+@media (min-width: 750px) {
+  .thao-container {
+    padding-left: var(--padding-x-desktop);
+    padding-right: var(--padding-x-desktop);
+  }
+}
+
+/* ---------- Section ---------- */
+.thao-section {
+  padding-top: var(--section-py-mobile);
+  padding-bottom: var(--section-py-mobile);
+}
+
+@media (min-width: 750px) {
+  .thao-section {
+    padding-top: var(--section-py-desktop);
+    padding-bottom: var(--section-py-desktop);
+  }
+}
+
+/* ---------- Typography ---------- */
+.thao-h1 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--h1-mobile);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  color: var(--thao-burgundy);
+  margin: 0;
+}
+
+.thao-h2 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--h2-mobile);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  color: var(--thao-burgundy);
+  margin: 0;
+}
+
+.thao-h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--h3-mobile);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  color: var(--thao-burgundy);
+  margin: 0;
+}
+
+.thao-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--body-mobile);
+  line-height: var(--lh-body);
+  color: var(--thao-text);
+}
+
+.thao-body--medium {
+  font-weight: 500;
+}
+
+.thao-caption {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--caption-mobile);
+  line-height: var(--lh-ui);
+  letter-spacing: var(--ls-ui);
+  color: var(--thao-text-secondary);
+}
+
+@media (min-width: 750px) {
+  .thao-h1 { font-size: var(--h1-desktop); }
+  .thao-h2 { font-size: var(--h2-desktop); }
+  .thao-h3 { font-size: var(--h3-desktop); }
+  .thao-body { font-size: var(--body-desktop); }
+  .thao-caption { font-size: var(--caption-desktop); }
+}
+
+/* ---------- Buttons ---------- */
+.thao-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--ui-size);
+  letter-spacing: var(--ls-ui);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 32px;
+  min-height: 52px;
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  transition: opacity var(--duration-base) var(--ease-default),
+              background-color var(--duration-base) var(--ease-default),
+              color var(--duration-base) var(--ease-default);
+}
+
+.thao-btn--primary {
+  background-color: var(--thao-burgundy);
+  color: #FFFFFF;
+}
+
+.thao-btn--primary:hover {
+  opacity: 0.9;
+}
+
+.thao-btn--secondary {
+  background-color: transparent;
+  border: 1.5px solid var(--thao-burgundy);
+  color: var(--thao-burgundy);
+}
+
+.thao-btn--secondary:hover {
+  background-color: var(--thao-burgundy);
+  color: #FFFFFF;
+}
+
+.thao-btn--white {
+  background-color: #FFFFFF;
+  color: var(--thao-burgundy);
+}
+
+.thao-btn--white:hover {
+  opacity: 0.9;
+}
+
+.thao-btn--full {
+  width: 100%;
+}
+
+/* ---------- Badge ---------- */
+.thao-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: var(--ls-ui);
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--thao-accent);
+  color: var(--thao-burgundy);
+}
+
+/* ---------- Accordion ---------- */
+.thao-accordion {
+  border-bottom: 1px solid var(--thao-border);
+}
+
+.thao-accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--body-mobile);
+  color: var(--thao-text);
+  text-align: left;
+}
+
+@media (min-width: 750px) {
+  .thao-accordion__trigger {
+    font-size: var(--body-desktop);
+  }
+}
+
+.thao-accordion__icon {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 20px;
+  transition: transform var(--duration-slow) var(--ease-default);
+  flex-shrink: 0;
+  margin-left: var(--space-4);
+}
+
+.thao-accordion[open] .thao-accordion__icon {
+  transform: rotate(45deg);
+}
+
+.thao-accordion__content {
+  padding-bottom: 20px;
+  color: var(--thao-text-secondary);
+  line-height: var(--lh-body);
+}
+
+/* ---------- Inputs ---------- */
+.thao-input {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--thao-border);
+  border-radius: var(--radius-btn);
+  background: var(--thao-bg-white);
+  color: var(--thao-text);
+  width: 100%;
+  outline: none;
+  transition: border-color var(--duration-base) var(--ease-default);
+}
+
+.thao-input:focus {
+  border-color: var(--thao-burgundy);
+}
+
+.thao-input::placeholder {
+  color: var(--thao-text-secondary);
+}
+
+/* ---------- Swatches ---------- */
+.thao-swatch-color {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default);
+}
+
+.thao-swatch-color:hover {
+  transform: scale(1.08);
+}
+
+.thao-swatch-color.is-active {
+  border-color: var(--thao-burgundy);
+}
+
+.thao-swatch-size {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--ui-size);
+  padding: 10px 20px;
+  border: 1.5px solid var(--thao-border);
+  border-radius: var(--radius-btn);
+  background: transparent;
+  color: var(--thao-text);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default);
+}
+
+.thao-swatch-size:hover {
+  border-color: var(--thao-burgundy);
+}
+
+.thao-swatch-size.is-active {
+  background-color: var(--thao-burgundy);
+  border-color: var(--thao-burgundy);
+  color: #FFFFFF;
+}
+
+/* ---------- Scroll Reveal ---------- */
+.thao-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-reveal) var(--ease-default),
+              transform var(--duration-reveal) var(--ease-default);
+}
+
+.thao-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Utilities ---------- */
+.thao-text-center { text-align: center; }
+.thao-text-secondary { color: var(--thao-text-secondary); }
+.thao-bg-beige { background-color: var(--thao-bg); }
+.thao-bg-white { background-color: var(--thao-bg-white); }
+.thao-bg-rose { background-color: var(--thao-accent); }
+.thao-bg-burgundy { background-color: var(--thao-burgundy); color: #FFFFFF; }
+
+/* ---------- Hide Dawn defaults ---------- */
+.section-header,
+.section-footer {
+  display: none !important;
+}
+
+/* ---------- Smooth scroll ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---------- Visually Hidden ---------- */
+.thao-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

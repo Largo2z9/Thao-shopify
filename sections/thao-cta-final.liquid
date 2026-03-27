@@ -1,0 +1,103 @@
+{%- comment -%} THAO — CTA Final {%- endcomment -%}
+
+<style>
+  .thao-cta-final {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  @media (min-width: 750px) {
+    .thao-cta-final {
+      height: 50vh;
+    }
+  }
+
+  .thao-cta-final__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .thao-cta-final__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .thao-cta-final__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(77, 0, 17, 0.6);
+  }
+
+  .thao-cta-final__placeholder {
+    position: absolute;
+    inset: 0;
+    background: var(--thao-burgundy);
+  }
+
+  .thao-cta-final__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 var(--padding-x-mobile);
+  }
+
+  .thao-cta-final__heading {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: var(--h2-mobile);
+    line-height: var(--lh-heading);
+    letter-spacing: var(--ls-heading);
+    color: #FFFFFF;
+    margin: 0 0 var(--space-6);
+  }
+
+  @media (min-width: 750px) {
+    .thao-cta-final__heading {
+      font-size: var(--h2-desktop);
+    }
+  }
+</style>
+
+<section class="thao-cta-final">
+  <div class="thao-cta-final__media">
+    {%- if section.settings.cta_image != blank -%}
+      {{ section.settings.cta_image | image_url: width: 2000 | image_tag:
+        loading: 'lazy',
+        sizes: '100vw',
+        widths: '600,900,1200,1600,2000',
+        alt: section.settings.cta_heading
+      }}
+      <div class="thao-cta-final__overlay"></div>
+    {%- else -%}
+      <div class="thao-cta-final__placeholder"></div>
+    {%- endif -%}
+  </div>
+
+  <div class="thao-cta-final__content thao-reveal">
+    <h2 class="thao-cta-final__heading">
+      {{ section.settings.cta_heading | default: 'Trouvez la paire qui vous ressemble.' }}
+    </h2>
+    <a href="#produit" class="thao-btn thao-btn--white">
+      {{ section.settings.cta_text | default: 'Trouver ma paire' }}
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "THAO CTA Final",
+  "class": "section-thao-cta-final",
+  "settings": [
+    { "type": "image_picker", "id": "cta_image", "label": "Background image" },
+    { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Trouvez la paire qui vous ressemble." },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Trouver ma paire" }
+  ],
+  "presets": [{ "name": "THAO CTA Final" }]
+}
+{% endschema %}

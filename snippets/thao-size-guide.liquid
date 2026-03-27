@@ -1,0 +1,159 @@
+{%- comment -%} THAO — Size Guide Modal {%- endcomment -%}
+
+<style>
+  .thao-size-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-slow) var(--ease-default),
+                visibility var(--duration-slow) var(--ease-default);
+    padding: var(--padding-x-mobile);
+  }
+
+  .thao-size-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .thao-size-modal {
+    background: var(--thao-bg-white);
+    border-radius: var(--radius-modal);
+    max-width: 560px;
+    width: 100%;
+    padding: var(--space-7);
+    position: relative;
+    transform: scale(0.95);
+    transition: transform var(--duration-slow) var(--ease-default);
+  }
+
+  .thao-size-overlay.is-open .thao-size-modal {
+    transform: scale(1);
+  }
+
+  .thao-size-modal__close {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--thao-text-secondary);
+    font-size: 20px;
+  }
+
+  .thao-size-modal__heading {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: var(--h3-mobile);
+    color: var(--thao-burgundy);
+    margin-bottom: var(--space-5);
+  }
+
+  @media (min-width: 750px) {
+    .thao-size-modal__heading {
+      font-size: var(--h3-desktop);
+    }
+  }
+
+  .thao-size-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-body);
+    font-size: var(--ui-size);
+  }
+
+  .thao-size-table th {
+    font-weight: 600;
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 2px solid var(--thao-border);
+    color: var(--thao-text);
+  }
+
+  .thao-size-table td {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--thao-border);
+    color: var(--thao-text-secondary);
+  }
+
+  .thao-size-modal__note {
+    margin-top: var(--space-5);
+    font-family: var(--font-body);
+    font-size: var(--caption-desktop);
+    color: var(--thao-text-secondary);
+    font-style: italic;
+  }
+</style>
+
+<div class="thao-size-overlay" id="thao-size-overlay">
+  <div class="thao-size-modal">
+    <button class="thao-size-modal__close" id="thao-size-close" aria-label="Fermer">×</button>
+
+    <h3 class="thao-size-modal__heading">Guide des tailles</h3>
+
+    <table class="thao-size-table">
+      <thead>
+        <tr>
+          <th>Taille</th>
+          <th>EU</th>
+          <th>UK</th>
+          <th>US</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>S/M</td>
+          <td>35 — 39</td>
+          <td>2.5 — 6</td>
+          <td>5 — 8</td>
+        </tr>
+        <tr>
+          <td>M/L</td>
+          <td>39 — 43</td>
+          <td>6 — 9</td>
+          <td>8 — 11</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="thao-size-modal__note">En cas de doute, prenez S/M. Nos grip socks sont légèrement extensibles.</p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var overlay = document.getElementById('thao-size-overlay');
+    var closeBtn = document.getElementById('thao-size-close');
+    var trigger = document.getElementById('thao-size-guide-trigger');
+
+    function open() {
+      overlay.classList.add('is-open');
+    }
+
+    function close() {
+      overlay.classList.remove('is-open');
+    }
+
+    if (trigger) trigger.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+    });
+  })();
+</script>

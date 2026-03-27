@@ -1,210 +1,112 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "thao_header": {
+      "type": "thao-header",
+      "settings": {
+        "logo_variant": "burgundy"
+      }
+    },
+    "thao_hero": {
+      "type": "thao-hero",
+      "settings": {
+        "hero_heading": "Grip socks pour celles qui bougent.",
+        "hero_subtitle": "Coton premium. Design français. Grip absolu.",
+        "hero_cta": "Découvrir"
+      }
+    },
+    "thao_marquee": {
+      "type": "thao-marquee",
+      "settings": {
+        "item_1": "Livraison offerte dès 40€",
+        "item_2": "Retours 30 jours",
+        "item_3": "Coton premium",
+        "item_4": "Made for pilates"
+      }
+    },
+    "thao_product": {
+      "type": "thao-product",
+      "settings": {
+        "product_title": "Grip Socks — Latte",
+        "product_price": "19,90 €",
+        "review_count": "128"
+      }
+    },
+    "thao_bundle": {
+      "type": "thao-bundle",
+      "settings": {}
+    },
+    "thao_lifestyle": {
+      "type": "thao-lifestyle",
+      "settings": {}
+    },
+    "thao_reassurance": {
+      "type": "thao-reassurance",
+      "settings": {}
+    },
+    "thao_faq": {
+      "type": "thao-faq",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "q1": {
+          "type": "question",
           "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
+            "question": "Quelle taille choisir ?",
+            "answer": "<p>Nous proposons deux tailles : S/M (pointure 35-39) et M/L (pointure 39-43). En cas de doute, nous recommandons la taille S/M.</p>"
           }
         },
-        "text": {
-          "type": "text",
+        "q2": {
+          "type": "question",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
+            "question": "Combien coûte la livraison ?",
+            "answer": "<p>La livraison est offerte dès 40€ d'achat. En dessous, les frais de port sont de 3,90€. Livraison en 3 à 5 jours ouvrés en France métropolitaine.</p>"
           }
         },
-        "button": {
-          "type": "buttons",
+        "q3": {
+          "type": "question",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "question": "Comment entretenir mes grip socks ?",
+            "answer": "<p>Lavage en machine à 30°C, séchage à l'air libre. Ne pas repasser ni passer au sèche-linge pour préserver les grips en silicone.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Quel est le délai de livraison ?",
+            "answer": "<p>Comptez 3 à 5 jours ouvrés pour la France métropolitaine. Vous recevrez un email de suivi dès l'expédition de votre commande.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Puis-je retourner ma commande ?",
+            "answer": "<p>Oui, vous disposez de 30 jours après réception pour retourner votre commande. Les retours sont gratuits. Contactez-nous à hello@thao.fr pour initier un retour.</p>"
           }
         }
       },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
+      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "settings": {}
+    },
+    "thao_cta_final": {
+      "type": "thao-cta-final",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "cta_heading": "Trouvez la paire qui vous ressemble.",
+        "cta_text": "Trouver ma paire"
       }
     },
-    "rich_text": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "show_view_all": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "2",
-        "padding_top": 28,
-        "padding_bottom": 36
-      }
-    },
-    "collage": {
-      "type": "collage",
-      "blocks": {
-        "collection-0": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "product": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "second_image": false
-          }
-        },
-        "collection-1": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        }
-      },
-      "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
-      ],
-      "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "video": {
-      "type": "video",
-      "settings": {
-        "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "heading_size": "h1",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
-      "blocks": {
-        "column1": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column2": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column3": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column1",
-        "column2",
-        "column3"
-      ],
-      "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "swipe_on_mobile": false,
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
+    "thao_footer": {
+      "type": "thao-footer",
+      "settings": {}
     }
   },
   "order": [
-    "image_banner",
-    "rich_text",
-    "featured_collection",
-    "collage",
-    "video",
-    "multicolumn"
+    "thao_header",
+    "thao_hero",
+    "thao_marquee",
+    "thao_product",
+    "thao_bundle",
+    "thao_lifestyle",
+    "thao_reassurance",
+    "thao_faq",
+    "thao_cta_final",
+    "thao_footer"
   ]
 }
