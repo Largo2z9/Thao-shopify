@@ -435,7 +435,9 @@
 
 /* ---------- Hide Dawn defaults ---------- */
 .section-header,
-.section-footer {
+.section-footer,
+.shopify-section-group-header-group,
+.shopify-section-group-footer-group {
   display: none !important;
 }
 
